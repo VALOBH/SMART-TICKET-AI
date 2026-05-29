@@ -1,0 +1,2719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SupportAI Dashboard</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#f4f7ff;
+min-height:100vh;
+overflow-x:hidden;
+display:flex;
+}
+
+
+/* SIDEBAR */
+
+.sidebar{
+width:280px;
+background:#081028;
+padding:30px 22px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+position:fixed;
+left:0;
+top:0;
+bottom:0;
+}
+
+.logo-area{
+display:flex;
+align-items:center;
+gap:14px;
+margin-bottom:40px;
+}
+
+.logo-icon{
+width:58px;
+height:58px;
+border-radius:18px;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:24px;
+box-shadow:0 10px 30px rgba(124,58,237,0.4);
+}
+
+.logo-text h2{
+color:white;
+font-size:28px;
+}
+
+.logo-text p{
+color:#94a3b8;
+font-size:14px;
+margin-top:4px;
+}
+
+.menu{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.menu-item{
+height:58px;
+border-radius:18px;
+display:flex;
+align-items:center;
+gap:14px;
+padding:0 20px;
+color:#cbd5e1;
+font-weight:500;
+cursor:pointer;
+transition:0.3s;
+}
+
+.menu-item:hover{
+background:rgba(255,255,255,0.05);
+}
+
+.menu-item.active{
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+color:white;
+box-shadow:0 10px 30px rgba(124,58,237,0.4);
+}
+
+.robot-box{
+margin-top:40px;
+text-align:center;
+}
+
+.robot-box img{
+width:100%;
+max-width:180px;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-12px);}
+100%{transform:translateY(0px);}
+}
+
+/* MAIN */
+
+.main{
+margin-left:280px;
+width:calc(100% - 280px);
+padding:34px;
+}
+
+/* HEADER */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.top-left h1{
+font-size:44px;
+color:#0f172a;
+font-weight:800;
+}
+
+.top-left p{
+margin-top:8px;
+color:#64748b;
+font-size:17px;
+}
+
+.top-right{
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+.icon-btn{
+width:52px;
+height:52px;
+background:white;
+border-radius:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 10px 25px rgba(15,23,42,0.06);
+font-size:20px;
+color:#475569;
+cursor:pointer;
+}
+
+.profile{
+display:flex;
+align-items:center;
+gap:14px;
+background:white;
+padding:10px 18px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(15,23,42,0.06);
+}
+
+.avatar{
+width:54px;
+height:54px;
+border-radius:50%;
+background:linear-gradient(135deg,#7c3aed,#4f46e5);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-weight:700;
+font-size:20px;
+}
+
+/* GRID */
+
+.main-grid{
+display:grid;
+grid-template-columns:1.45fr 0.85fr;
+gap:20px;
+align-items:start;
+}
+
+/* CARD */
+
+.card{
+background:white;
+border-radius:28px;
+padding:28px;
+box-shadow:0 10px 40px rgba(15,23,42,0.06);
+}
+
+/* INPUT */
+
+.card-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.card-header h2{
+font-size:28px;
+color:#0f172a;
+}
+
+.counter{
+color:#94a3b8;
+font-weight:600;
+}
+
+textarea{
+width:100%;
+height:220px;
+border:2px solid #e2e8f0;
+border-radius:22px;
+padding:22px;
+font-size:16px;
+resize:none;
+outline:none;
+font-family:'Poppins',sans-serif;
+transition:0.3s;
+}
+
+textarea:focus{
+border-color:#8b5cf6;
+box-shadow:0 0 0 5px rgba(139,92,246,0.1);
+}
+
+/* BUTTONS */
+
+.button-row{
+display:flex;
+gap:16px;
+margin-top:22px;
+}
+
+.primary-btn{
+height:60px;
+padding:0 28px;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:12px;
+box-shadow:0 15px 30px rgba(124,58,237,0.35);
+transition:0.3s;
+}
+
+.primary-btn:hover{
+transform:translateY(-3px);
+}
+
+.secondary-btn{
+height:60px;
+padding:0 26px;
+border:none;
+border-radius:18px;
+background:#f8fafc;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+}
+
+/* EXAMPLES */
+
+.examples{
+margin-top:28px;
+}
+
+.examples h3{
+margin-bottom:16px;
+color:#0f172a;
+}
+
+.example-ticket{
+padding:16px 18px;
+background:#f5f3ff;
+border-radius:16px;
+margin-bottom:14px;
+cursor:pointer;
+transition:0.3s;
+color:#4c1d95;
+font-weight:500;
+}
+
+.example-ticket:hover{
+transform:translateX(5px);
+background:#ede9fe;
+}
+
+/* RIGHT PANEL */
+
+.right-panel{
+min-height:720px;
+position:relative;
+width:100%;
+max-width:620px;
+padding:34px;
+border-radius:34px;
+}
+
+/* EMPTY */
+
+.empty-state{
+height:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
+}
+
+.empty-state img{
+width:240px;
+margin-bottom:20px;
+animation:float 4s ease-in-out infinite;
+}
+
+.empty-state h2{
+font-size:36px;
+margin-bottom:12px;
+color:#0f172a;
+}
+
+.empty-state p{
+color:#64748b;
+line-height:1.7;
+max-width:340px;
+}
+
+/* LOADING */
+
+.loading-state{
+display:none;
+height:100%;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+}
+
+.loader{
+width:80px;
+height:80px;
+border-radius:50%;
+border:8px solid #e9d5ff;
+border-top:8px solid #7c3aed;
+animation:spin 1s linear infinite;
+margin-bottom:24px;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+.loading-bar{
+width:260px;
+height:14px;
+background:#ede9fe;
+border-radius:30px;
+overflow:hidden;
+margin-top:20px;
+}
+
+.loading-fill{
+height:100%;
+width:0%;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+animation:loadbar 2s linear forwards;
+}
+
+@keyframes loadbar{
+100%{
+width:100%;
+}
+}
+
+/* RESULTS */
+
+.results{
+display:none;
+animation:fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.result-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(280px,1fr));
+gap:24px;
+margin-top:24px;
+width:100%;
+}
+
+.result-box{
+padding:28px;
+border-radius:24px;
+display:flex;
+gap:20px;
+align-items:center;
+transition:0.3s;
+
+min-height:170px;
+width:100%;
+
+overflow:visible;
+}
+
+
+.result-box:hover{
+transform:translateY(-4px);
+}
+
+.result-icon{
+width:58px;
+height:58px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+color:white;
+}
+
+.purple{
+background:#8b5cf6;
+}
+
+.red{
+background:#ef4444;
+}
+
+.orange{
+background:#f59e0b;
+}
+
+.blue{
+background:#2563eb;
+}
+
+.bg-purple{
+background:#f5f3ff;
+}
+
+.bg-red{
+background:#fef2f2;
+}
+
+.bg-orange{
+background:#fff7ed;
+}
+
+.bg-blue{
+background:#eff6ff;
+}
+
+.result-content h4{
+font-size:15px;
+color:#64748b;
+margin-bottom:4px;
+}
+
+.result-content{
+flex:1;
+min-width:0;
+}
+
+.result-content h4{
+font-size:15px;
+margin-bottom:6px;
+color:#64748b;
+}
+
+.result-content h2{
+font-size:20px;
+line-height:1.5;
+color:#0f172a;
+font-weight:700;
+
+word-break:break-word;
+overflow-wrap:break-word;
+}
+
+.summary-card{
+margin-top:22px;
+background:#ecfdf5;
+padding:24px;
+border-radius:22px;
+}
+
+.summary-card h3{
+margin-bottom:12px;
+}
+
+.summary-card p{
+line-height:1.8;
+color:#166534;
+}
+
+.score-box{
+margin-top:22px;
+background:white;
+padding:24px;
+border-radius:22px;
+box-shadow:0 10px 30px rgba(15,23,42,0.05);
+}
+
+.progress{
+height:14px;
+background:#ede9fe;
+border-radius:30px;
+overflow:hidden;
+margin-top:16px;
+}
+
+.progress-fill{
+height:100%;
+width:0%;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+border-radius:30px;
+animation:progressAnim 1.5s ease;
+}
+
+@keyframes progressAnim{
+from{
+width:0%;
+}
+to{
+width:100%;
+}
+}
+
+@media(max-width:1200px){
+
+.main-grid{
+grid-template-columns:1fr;
+}
+
+.sidebar{
+display:none;
+}
+
+.main{
+margin-left:0;
+width:100%;
+}
+
+}
+
+/* FORWARD BUTTON */
+
+.forward-box{
+margin-top:22px;
+display:flex;
+justify-content:center;
+}
+
+.forward-btn{
+height:60px;
+padding:0 28px;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#22c55e,#16a34a);
+color:white;
+font-size:17px;
+font-weight:600;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:12px;
+box-shadow:0 15px 30px rgba(34,197,94,0.35);
+transition:0.3s;
+}
+
+.forward-btn:hover{
+transform:translateY(-3px);
+}
+
+
+/* ===================================
+   REDUCE WHOLE PAGE SIZE
+=================================== */
+
+body{
+    zoom:85%;
+    background:#f5f7ff;
+}
+
+/* MAIN WRAPPER */
+
+.main-wrapper{
+    max-width:1350px;
+    padding:18px;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:220px;
+    padding:20px 16px;
+}
+
+.sidebar-logo h2{
+    font-size:30px;
+}
+
+.sidebar-menu a{
+    padding:14px 16px;
+    font-size:16px;
+}
+
+/* TOP TITLE */
+
+.page-header h1{
+    font-size:42px;
+}
+
+.page-header p{
+    font-size:17px;
+}
+
+/* MAIN GRID */
+
+.analysis-layout{
+    gap:18px;
+}
+
+/* LEFT + RIGHT CARDS */
+
+.ticket-card,
+.results-panel,
+.example-card{
+    padding:22px;
+    border-radius:22px;
+}
+
+/* INPUT AREA */
+
+.ticket-input{
+    height:220px;
+    font-size:15px;
+    padding:18px;
+    border-radius:18px;
+}
+
+/* BUTTONS */
+
+.button-group{
+    gap:12px;
+}
+
+.analyze-btn{
+    height:54px;
+    font-size:16px;
+    padding:0 24px;
+}
+
+.clear-btn{
+    height:54px;
+    padding:0 22px;
+    font-size:15px;
+}
+
+/* RESULT CARDS */
+
+.result-grid{
+    gap:14px;
+}
+
+.result-card{
+    padding:18px;
+    border-radius:18px;
+}
+
+.result-card h3{
+    font-size:15px;
+}
+
+.result-card h2{
+    font-size:28px;
+}
+
+/* SUMMARY */
+
+.summary-card{
+    padding:20px;
+}
+
+.summary-card p{
+    font-size:15px;
+    line-height:1.8;
+}
+
+/* CONFIDENCE */
+
+.confidence-card{
+    padding:20px;
+}
+
+.confidence-percent{
+    font-size:38px;
+}
+
+/* EXAMPLE TICKETS */
+
+.example-ticket{
+    padding:15px;
+    font-size:15px;
+}
+
+/* ROBOT */
+
+.robot-image{
+    width:140px;
+}
+
+/* REMOVE EXTRA HUGE SPACING */
+
+.section-gap{
+    margin-top:18px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+
+    body{
+        zoom:100%;
+    }
+
+    .analysis-layout{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        width:90px;
+    }
+}
+
+/* CSV PAGE */
+
+.csv-page{
+position:fixed;
+inset:0;
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.csv-overlay{
+position:absolute;
+inset:0;
+background:rgba(8,16,40,0.7);
+backdrop-filter:blur(5px);
+}
+
+.csv-container{
+position:relative;
+width:92%;
+height:92%;
+background:#f5f7ff;
+border-radius:28px;
+padding:30px;
+overflow:auto;
+z-index:2;
+animation:fadeIn 0.4s ease;
+}
+
+.csv-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+.csv-header h1{
+font-size:42px;
+color:#0f172a;
+}
+
+.csv-header p{
+color:#64748b;
+margin-top:8px;
+}
+
+.csv-close{
+width:52px;
+height:52px;
+background:white;
+border-radius:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+font-size:22px;
+}
+
+.csv-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:24px;
+}
+
+.csv-card{
+background:white;
+border-radius:26px;
+padding:24px;
+box-shadow:0 10px 40px rgba(15,23,42,0.06);
+margin-bottom:20px;
+}
+
+.upload-box{
+border:3px dashed #c4b5fd;
+border-radius:24px;
+padding:60px 30px;
+text-align:center;
+transition:0.3s;
+cursor:pointer;
+background:#faf5ff;
+}
+
+.upload-box.dragover{
+border-color:#7c3aed;
+background:#f3e8ff;
+box-shadow:0 0 30px rgba(124,58,237,0.2);
+}
+
+.upload-box i{
+font-size:60px;
+color:#7c3aed;
+margin-bottom:20px;
+}
+
+.upload-box h3{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.upload-box p{
+margin:12px 0;
+color:#64748b;
+}
+
+.upload-box button{
+height:56px;
+padding:0 26px;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+margin-bottom:14px;
+}
+
+.upload-box span{
+display:block;
+color:#94a3b8;
+}
+
+.file-info{
+margin-top:18px;
+font-weight:600;
+color:#2563eb;
+}
+
+.validation-message{
+margin-top:14px;
+font-weight:600;
+}
+
+.chips{
+display:flex;
+flex-wrap:wrap;
+gap:14px;
+margin-top:18px;
+}
+
+.chip{
+padding:12px 18px;
+border-radius:40px;
+background:#f5f3ff;
+color:#5b21b6;
+font-weight:600;
+}
+
+.empty-preview{
+height:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.empty-preview img{
+width:220px;
+margin-bottom:20px;
+}
+
+.csv-loading{
+display:none;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+height:100%;
+}
+
+.preview-card{
+display:none;
+}
+
+.analytics-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+margin:20px 0;
+}
+
+.analytics-box{
+background:#f5f3ff;
+padding:20px;
+border-radius:20px;
+}
+
+.analytics-box h3{
+font-size:15px;
+color:#64748b;
+margin-bottom:10px;
+}
+
+.analytics-box h1{
+font-size:32px;
+color:#0f172a;
+}
+
+/* =========================================
+   MODERN DASHBOARD
+========================================= */
+
+#dashboardPage .csv-container{
+width:95%;
+max-width:1600px;
+
+height:92vh;
+
+overflow-y:auto;
+overflow-x:hidden;
+
+padding:24px;
+
+background:#f4f7ff;
+
+border-radius:30px;
+}
+
+/* TOP METRICS */
+
+#dashboardPage .analytics-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:22px;
+margin-bottom:28px;
+}
+
+#dashboardPage .analytics-box{
+background:white;
+border-radius:24px;
+padding:22px;
+position:relative;
+overflow:hidden;
+
+min-height:130px;
+
+display:flex;
+flex-direction:column;
+justify-content:flex-start;
+
+transition:0.3s;
+
+border:1px solid #e2e8f0;
+
+box-shadow:
+0 10px 30px rgba(15,23,42,0.06);
+}
+
+
+#dashboardPage .analytics-box:hover{
+transform:translateY(-6px);
+}
+
+#dashboardPage .analytics-box h3{
+font-size:17px;
+color:#64748b;
+font-weight:600;
+margin-bottom:18px;
+}
+
+#dashboardPage .analytics-box h1{
+font-size:62px;
+font-weight:800;
+line-height:1;
+margin-top:0;
+position:relative;
+z-index:2;
+}
+
+/* NUMBER COLORS */
+
+#dashTotal{
+color:#8b5cf6;
+text-shadow:0 0 15px rgba(139,92,246,0.5);
+}
+
+#dashHigh{
+color:#ff4d6d;
+text-shadow:0 0 15px rgba(255,77,109,0.5);
+}
+
+#dashOpen{
+color:#60a5fa;
+text-shadow:0 0 15px rgba(96,165,250,0.5);
+}
+
+#dashResolved{
+color:#4ade80;
+text-shadow:0 0 15px rgba(74,222,128,0.5);
+}
+
+/* =========================================
+   PREMIUM SVG GLOW WAVES
+========================================= */
+
+.metric-wave{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:90px;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+.metric-wave svg{
+    width:100%;
+    height:100%;
+}
+
+/* MAIN GLOW LINE */
+
+.metric-wave path{
+    fill:none;
+    stroke-width:5;
+    stroke-linecap:round;
+    filter:drop-shadow(0 0 10px currentColor)
+           drop-shadow(0 0 20px currentColor);
+}
+
+/* BLUE */
+
+.wave-blue path{
+    stroke:#3b82f6;
+    color:#3b82f6;
+}
+
+/* PURPLE */
+
+.wave-purple path{
+    stroke:#a855f7;
+    color:#a855f7;
+}
+
+/* ORANGE */
+
+.wave-orange path{
+    stroke:#f59e0b;
+    color:#f59e0b;
+}
+
+/* GREEN */
+
+.wave-green path{
+    stroke:#22c55e;
+    color:#22c55e;
+}
+
+/* CHARTS */
+
+.charts-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:24px;
+margin-top:24px;
+margin-bottom:24px;
+}
+
+.chart-box{
+background:white;
+border-radius:24px;
+padding:20px;
+
+box-shadow:0 10px 35px rgba(15,23,42,0.06);
+
+height:340px;
+
+position:relative;
+overflow:hidden;
+
+transition:0.3s;
+}
+
+.chart-box:hover{
+transform:translateY(-4px);
+}
+
+.chart-box h3{
+font-size:22px;
+margin-bottom:22px;
+color:#0f172a;
+font-weight:700;
+}
+
+.chart-box canvas{
+width:100% !important;
+height:240px !important;
+}
+
+/* AI INSIGHTS */
+
+#dashboardPage .csv-card{
+background:white;
+border-radius:28px;
+padding:26px;
+box-shadow:0 10px 35px rgba(15,23,42,0.06);
+margin-top:22px;
+}
+
+#dashboardPage .csv-card h2{
+font-size:28px;
+margin-bottom:20px;
+}
+
+#dashboardPage .chips{
+display:flex;
+flex-wrap:wrap;
+gap:18px;
+}
+
+#dashboardPage .chip{
+padding:16px 22px;
+border-radius:50px;
+font-weight:600;
+font-size:15px;
+background:#eef2ff;
+color:#4338ca;
+}
+
+/* TABLE */
+
+.table-wrapper{
+overflow:auto;
+margin-top:20px;
+border-radius:22px;
+border:1px solid #e2e8f0;
+max-height:420px;
+background:white;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+thead{
+position:sticky;
+top:0;
+background:white;
+z-index:2;
+}
+
+th{
+padding:18px;
+font-size:15px;
+font-weight:700;
+color:#0f172a;
+border-bottom:1px solid #e2e8f0;
+}
+
+td{
+padding:18px;
+font-size:14px;
+color:#475569;
+border-bottom:1px solid #f1f5f9;
+}
+
+tbody tr:hover{
+background:#f8fafc;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+
+#dashboardPage .analytics-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.charts-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:700px){
+
+#dashboardPage .analytics-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+/* =====================================
+   HISTORY SECTION
+===================================== */
+
+.history-section{
+margin-top:30px;
+}
+
+.history-title{
+font-size:28px;
+font-weight:700;
+margin-bottom:20px;
+color:#0f172a;
+}
+
+.history-container{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.history-card{
+background:white;
+padding:24px;
+border-radius:24px;
+box-shadow:0 10px 30px rgba(15,23,42,0.06);
+border:1px solid #e2e8f0;
+transition:0.3s;
+}
+
+.history-card:hover{
+transform:translateY(-4px);
+}
+
+.history-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:14px;
+}
+
+.history-priority{
+padding:8px 18px;
+border-radius:30px;
+background:#fee2e2;
+color:#dc2626;
+font-weight:700;
+font-size:14px;
+}
+
+.history-date{
+color:#64748b;
+font-size:14px;
+}
+
+.history-message{
+font-size:16px;
+line-height:1.7;
+color:#334155;
+margin-bottom:16px;
+}
+
+.history-tags{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.history-tag{
+padding:10px 16px;
+border-radius:40px;
+background:#f5f3ff;
+color:#6d28d9;
+font-weight:600;
+font-size:14px;
+}
+
+/* =====================================
+   SUCCESS POPUP
+===================================== */
+
+.success-popup{
+position:fixed;
+inset:0;
+background:rgba(15,23,42,0.6);
+backdrop-filter:blur(6px);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:99999;
+animation:fadeIn 0.3s ease;
+}
+
+.popup-box{
+width:420px;
+background:white;
+border-radius:28px;
+padding:40px 30px;
+text-align:center;
+box-shadow:0 20px 60px rgba(15,23,42,0.2);
+}
+
+.popup-box i{
+font-size:70px;
+color:#22c55e;
+margin-bottom:20px;
+}
+
+.popup-box h2{
+font-size:34px;
+margin-bottom:14px;
+color:#0f172a;
+}
+
+.popup-box p{
+font-size:17px;
+line-height:1.7;
+color:#64748b;
+margin-bottom:28px;
+}
+
+.popup-box button{
+height:56px;
+padding:0 30px;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#22c55e,#16a34a);
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.popup-box button:hover{
+transform:translateY(-3px);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+th,
+td{
+    text-align:left;
+    padding:18px 20px;
+    vertical-align:middle;
+}
+
+th:nth-child(1),
+td:nth-child(1){
+    width:14%;
+}
+
+th:nth-child(2),
+td:nth-child(2){
+    width:44%;
+}
+
+th:nth-child(3),
+td:nth-child(3){
+    width:18%;
+}
+
+th:nth-child(4),
+td:nth-child(4){
+    width:12%;
+}
+
+th:nth-child(5),
+td:nth-child(5){
+    width:12%;
+}
+
+td{
+    word-wrap:break-word;
+}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<div>
+
+<div class="logo-area">
+
+<div class="logo-icon">
+<i class="fa-solid fa-robot"></i>
+</div>
+
+<div class="logo-text">
+<h2>SupportAI</h2>
+<p>Ticket Analysis</p>
+</div>
+
+</div>
+
+<div class="menu">
+
+<div class="menu-item active">
+<i class="fa-solid fa-house"></i>
+Get Started
+</div>
+
+<div class="menu-item" id="uploadMenu">
+<i class="fa-solid fa-upload"></i>
+Upload CSV
+</div>
+
+<div class="menu-item" id="dashboardMenu">
+<i class="fa-solid fa-chart-column"></i>
+Dashboard
+</div>
+
+</div>
+
+</div>
+
+<div class="robot-box">
+<img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<div class="top-left">
+<h1>Get Started</h1>
+
+<p>
+Paste your support ticket below and let AI analyze it instantly.
+</p>
+</div>
+
+
+</div>
+
+<!-- GRID -->
+
+<div class="main-grid">
+
+<!-- LEFT -->
+
+<div>
+
+<div class="card">
+
+<div class="card-header">
+<h2>Enter Support Ticket</h2>
+<div class="counter">
+<span id="charCount">0</span> / 5000
+</div>
+</div>
+
+<textarea
+id="ticketInput"
+maxlength="5000"
+placeholder="Paste your support ticket or customer message here..."></textarea>
+
+<div class="button-row">
+
+<button class="primary-btn" id="analyzeBtn">
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+Analyze Ticket
+</button>
+
+<button class="secondary-btn" id="clearBtn">
+Clear
+</button>
+
+</div>
+
+</div>
+
+<div class="card examples">
+
+<h3>
+💡 Example Tickets (Click to use)
+</h3>
+
+<div class="example-ticket">
+I am unable to login to my account after making the payment.
+</div>
+
+<div class="example-ticket">
+The payment failed but amount was deducted from my account.
+</div>
+
+<div class="example-ticket">
+App is crashing whenever I try to upload a document.
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="card right-panel">
+
+<!-- EMPTY -->
+
+<div class="empty-state" id="emptyState">
+
+<img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png">
+
+<h2>No Analysis Yet</h2>
+
+<p>
+Paste a support ticket and click Analyze Ticket to generate AI insights.
+</p>
+
+</div>
+
+<!-- LOADING -->
+
+<div class="loading-state" id="loadingState">
+
+<div class="loader"></div>
+
+<h2>Analyzing support ticket...</h2>
+
+<div class="loading-bar">
+<div class="loading-fill"></div>
+</div>
+
+</div>
+
+<!-- RESULTS -->
+
+<div class="results" id="results">
+
+<h2>AI Analysis Results</h2>
+
+<div class="result-grid">
+
+<div class="result-box bg-purple">
+
+<div class="result-icon purple">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+
+<div class="result-content">
+<h4>Category</h4>
+<h2 id="category"></h2>
+</div>
+
+</div>
+
+<div class="result-box bg-red">
+
+<div class="result-icon red">
+<i class="fa-solid fa-flag"></i>
+</div>
+
+<div class="result-content">
+<h4>Priority</h4>
+<h2 id="priority"></h2>
+</div>
+
+</div>
+
+<div class="result-box bg-orange">
+
+<div class="result-icon orange">
+<i class="fa-regular fa-face-frown"></i>
+</div>
+
+<div class="result-content">
+<h4>Sentiment</h4>
+<h2 id="sentiment"></h2>
+</div>
+
+</div>
+
+<div class="result-box bg-blue">
+
+<div class="result-icon blue">
+<i class="fa-solid fa-users"></i>
+</div>
+
+<div class="result-content">
+<h4>Suggested Team</h4>
+<h2 id="team"></h2>
+</div>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<h3>AI Summary</h3>
+
+<p id="summary"></p>
+
+</div>
+
+<!-- FORWARD BUTTON -->
+
+<div class="forward-box">
+
+<button id="forwardBtn" class="forward-btn">
+    <i class="fa-solid fa-paper-plane"></i>
+    Forward to Team
+</button>
+
+</div>
+
+<div class="score-box">
+
+<h2>Confidence Score</h2>
+
+<h1 id="confidenceScore" style="margin-top:12px;">
+0%
+</h1>
+
+<div class="progress">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- HISTORY SECTION -->
+
+<div class="history-section">
+
+<h2 class="history-title">
+Recent Analysis History
+</h2>
+
+<div
+class="history-container"
+id="historyContainer">
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CSV UPLOAD MODAL -->
+
+<div class="csv-page" id="csvPage">
+
+<div class="csv-overlay"></div>
+
+<div class="csv-container">
+
+<!-- HEADER -->
+
+<div class="csv-header">
+
+<div>
+<h1>Upload CSV</h1>
+<p>
+Upload your CSV file with support tickets and let AI analyze them.
+</p>
+</div>
+
+<div class="csv-close" id="closeCsv">
+<i class="fa-solid fa-xmark"></i>
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="csv-grid">
+
+<!-- LEFT -->
+
+<div>
+
+<!-- UPLOAD CARD -->
+
+<div class="csv-card">
+
+<h2>Upload Support Tickets CSV</h2>
+
+<div class="upload-box" id="uploadBox">
+
+<input type="file" id="csvFile" hidden accept=".csv">
+
+<i class="fa-solid fa-cloud-arrow-up"></i>
+
+<h3>Drag and drop your CSV file here</h3>
+
+<p>or</p>
+
+<button id="chooseBtn">
+Choose File
+</button>
+
+<span>
+Supports CSV format • Max file size: 10MB
+</span>
+
+</div>
+
+<div class="file-info" id="fileInfo"></div>
+
+<div class="validation-message" id="validationMessage"></div>
+
+</div>
+
+<!-- FORMAT GUIDE -->
+
+<div class="csv-card guide-card">
+
+<h2>CSV Format Guide</h2>
+
+<div class="chips">
+
+<div class="chip">Ticket ID</div>
+<div class="chip">Subject</div>
+<div class="chip">Description</div>
+<div class="chip">Category (Optional)</div>
+<div class="chip">Priority (Optional)</div>
+<div class="chip">Status (Optional)</div>
+<div class="chip">Sentiment (Optional)</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div>
+
+<!-- EMPTY -->
+
+<div class="csv-card empty-preview" id="emptyPreview">
+
+<img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png">
+
+<h2>No CSV Uploaded Yet</h2>
+
+<p>
+Upload a CSV file to preview ticket data.
+</p>
+
+</div>
+
+<!-- LOADING -->
+
+<div class="csv-card csv-loading" id="csvLoading">
+
+<div class="loader"></div>
+
+<h2>Analyzing uploaded CSV...</h2>
+
+<div class="loading-bar">
+<div class="loading-fill"></div>
+</div>
+
+</div>
+
+<!-- PREVIEW -->
+
+<div class="csv-card preview-card" id="previewCard">
+
+<h2>CSV Preview</h2>
+
+<div class="analytics-grid">
+
+<div class="analytics-box">
+<h3>Total Tickets</h3>
+<h1 id="totalTickets">0</h1>
+</div>
+
+<div class="analytics-box">
+<h3>High Priority</h3>
+<h1 id="highPriority">0</h1>
+</div>
+
+<div class="analytics-box">
+<h3>Open Tickets</h3>
+<h1 id="openTickets">0</h1>
+</div>
+
+<div class="analytics-box">
+<h3>Categories</h3>
+<h1 id="categoriesCount">0</h1>
+</div>
+
+</div>
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Ticket ID</th>
+<th>Subject</th>
+<th>Description</th>
+<th>Priority</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody id="previewTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- CHARTS -->
+
+<div class="charts-grid">
+
+<div class="chart-box">
+
+<h3>Daily Ticket Trends</h3>
+
+<canvas id="trendChart"></canvas>
+
+</div>
+
+<div class="chart-box">
+
+<h3>Live Analytics</h3>
+
+<canvas id="analyticsChart"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- DASHBOARD PAGE -->
+
+<div class="csv-page" id="dashboardPage">
+
+<div class="csv-overlay"></div>
+
+<div class="csv-container">
+
+<div class="csv-header">
+
+<div>
+<h1>AI Analytics Dashboard</h1>
+<p>Live support ticket analytics powered by AI</p>
+</div>
+
+<div class="csv-close" id="closeDashboard">
+<i class="fa-solid fa-xmark"></i>
+</div>
+
+</div>
+
+<!-- METRICS -->
+
+<div class="analytics-grid">
+
+<div class="analytics-box">
+
+<h3>Total Tickets</h3>
+<h1 id="dashTotal">0</h1>
+
+</div>
+
+<div class="analytics-box">
+
+<h3>High Priority</h3>
+<h1 id="dashHigh">0</h1>
+
+</div>
+
+<div class="analytics-box">
+
+<h3>Open Tickets</h3>
+<h1 id="dashOpen">0</h1>
+
+
+</div>
+
+<div class="analytics-box">
+
+<h3>Resolved Tickets</h3>
+<h1 id="dashResolved">0</h1>
+
+</div>
+</div>
+
+<!-- CHARTS -->
+
+<div class="charts-grid">
+
+<div class="chart-box">
+<h3>Tickets by Category</h3>
+<canvas id="categoryChart"></canvas>
+</div>
+
+<div class="chart-box">
+<h3>Priority Distribution</h3>
+<canvas id="priorityChart"></canvas>
+</div>
+
+</div>
+
+<div class="charts-grid">
+
+<div class="chart-box">
+<h3>Weekly Ticket Activity</h3>
+<canvas id="weeklyChart"></canvas>
+</div>
+
+<div class="chart-box">
+<h3>Sentiment Analysis</h3>
+<canvas id="sentimentChart"></canvas>
+</div>
+
+</div>
+
+<!-- AI INSIGHTS -->
+
+<div class="csv-card">
+
+<h2>AI Insights</h2>
+
+<div class="chips">
+
+<div class="chip" id="insight1">
+32% of tickets are high priority
+</div>
+
+<div class="chip" id="insight2">
+Login issues are most common
+</div>
+
+<div class="chip" id="insight3">
+Negative sentiment increased
+</div>
+
+</div>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="csv-card">
+
+<h2>Recent Tickets</h2>
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Ticket ID</th>
+<th>Subject</th>
+<th>Category</th>
+<th>Priority</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody id="dashboardTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+let recentTickets = [];
+/* =====================================
+   CHARACTER COUNT
+===================================== */
+
+const textarea = document.getElementById("ticketInput");
+const charCount = document.getElementById("charCount");
+
+textarea.addEventListener("input", () => {
+    charCount.innerText = textarea.value.length;
+});
+
+/* =====================================
+   EXAMPLE TICKETS
+===================================== */
+
+document.querySelectorAll(".example-ticket").forEach(ticket => {
+
+    ticket.addEventListener("click", () => {
+
+        textarea.value = ticket.innerText;
+        charCount.innerText = textarea.value.length;
+
+    });
+
+});
+
+/* =====================================
+   CLEAR BUTTON
+===================================== */
+
+document.getElementById("clearBtn").addEventListener("click", () => {
+
+    textarea.value = "";
+    charCount.innerText = "0";
+
+});
+
+/* =====================================
+   ANALYZE BUTTON
+===================================== */
+
+document.getElementById("analyzeBtn").addEventListener("click", () => {
+
+    const text = textarea.value.toLowerCase();
+
+    if(text.trim() === ""){
+        alert("Please enter a support ticket.");
+        return;
+    }
+
+
+    document.getElementById("emptyState").style.display = "none";
+    document.getElementById("results").style.display = "none";
+    document.getElementById("loadingState").style.display = "flex";
+
+    setTimeout(() => {
+
+        document.getElementById("loadingState").style.display = "none";
+        document.getElementById("results").style.display = "block";
+
+        let category = "General Issue";
+        let priority = "Medium";
+        let sentiment = "Neutral";
+        let team = "Customer Support";
+
+        if(text.includes("payment") || text.includes("billing")){
+            category = "Billing Issue";
+            team = "Billing Support";
+        }
+
+        if(text.includes("login") || text.includes("password")){
+            category = "Account Issue";
+            team = "Authentication Team";
+        }
+
+        if(text.includes("crash") || text.includes("bug")){
+            category = "Technical Issue";
+            team = "Technical Support";
+        }
+
+        if(text.includes("urgent") || text.includes("immediately")){
+            priority = "High";
+        }
+
+        if(text.includes("angry") || text.includes("bad") || text.includes("worst")){
+            sentiment = "Negative";
+        }
+
+        document.getElementById("category").innerText = category;
+document.getElementById("priority").innerText = priority;
+document.getElementById("sentiment").innerText = sentiment;
+document.getElementById("team").innerText = team;
+
+/* CONFIDENCE SCORE */
+
+let confidence = Math.floor(Math.random() * 21) + 80;
+
+document.getElementById("confidenceScore").innerText =
+confidence + "%";
+
+document.getElementById("progressFill").style.width =
+confidence + "%";
+
+
+saveTicketToDatabase(
+    text,
+    category,
+    priority,
+    sentiment
+);
+
+loadHistory();
+
+/* SUMMARY */
+
+document.getElementById("summary").innerText =
+"The customer is facing an issue related to " +
+category.toLowerCase() +
+". The ticket requires " +
+priority.toLowerCase() +
+" priority attention from the " +
+team +
+" team.";
+
+document.getElementById("forwardBtn").onclick = function(){
+
+    document.getElementById("successPopup").style.display = "flex";
+
+    document.getElementById("popupMessage").innerText =
+    "Ticket forwarded to " + team + " successfully!";
+
+};
+
+document.getElementById("closePopupBtn").onclick = function(){
+
+    document.getElementById("successPopup").style.display = "none";
+
+};
+
+/* SAVE RECENT TICKET */
+
+recentTickets.unshift({
+
+    id:"#"+Math.floor(Math.random()*9000 + 1000),
+
+    subject:text.substring(0,40),
+
+    category:category,
+
+    priority:priority,
+
+    status:"Open"
+
+});
+
+/* LIMIT TO LAST 10 */
+
+if(recentTickets.length > 10){
+    recentTickets.pop();
+}
+
+/* UPDATE TABLE */
+
+updateDashboardTable();
+
+/* UPDATE DASHBOARD COUNTS */
+
+document.getElementById("dashTotal").innerText =
+recentTickets.length;
+
+document.getElementById("dashHigh").innerText =
+recentTickets.filter(t => t.priority === "High").length;
+
+document.getElementById("dashOpen").innerText =
+recentTickets.filter(t => t.status === "Open").length;
+
+document.getElementById("dashResolved").innerText =
+recentTickets.filter(t => t.status === "Resolved").length;
+    }, 2000);
+
+});
+
+/* =====================================
+   CSV PAGE
+===================================== */
+
+const uploadMenu = document.getElementById("uploadMenu");
+const csvPage = document.getElementById("csvPage");
+const closeCsv = document.getElementById("closeCsv");
+
+uploadMenu.addEventListener("click", () => {
+    csvPage.style.display = "flex";
+});
+
+closeCsv.addEventListener("click", () => {
+    csvPage.style.display = "none";
+});
+
+/* =====================================
+   CSV FILE
+===================================== */
+
+const chooseBtn = document.getElementById("chooseBtn");
+const csvFile = document.getElementById("csvFile");
+const uploadBox = document.getElementById("uploadBox");
+
+chooseBtn.addEventListener("click", () => {
+    csvFile.click();
+});
+
+uploadBox.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    uploadBox.classList.add("dragover");
+});
+
+uploadBox.addEventListener("dragleave", () => {
+    uploadBox.classList.remove("dragover");
+});
+
+uploadBox.addEventListener("drop", (e) => {
+
+    e.preventDefault();
+
+    uploadBox.classList.remove("dragover");
+
+    const file = e.dataTransfer.files[0];
+
+    handleCSV(file);
+
+});
+
+csvFile.addEventListener("change", () => {
+
+    const file = csvFile.files[0];
+
+    handleCSV(file);
+
+});
+
+function handleCSV(file){
+
+    if(!file) return;
+
+    document.getElementById("fileInfo").innerHTML =
+    "Uploaded: " + file.name;
+
+    document.getElementById("validationMessage").innerHTML =
+    "CSV validated successfully";
+
+    document.getElementById("emptyPreview").style.display = "none";
+
+    document.getElementById("csvLoading").style.display = "flex";
+
+    setTimeout(() => {
+
+        document.getElementById("csvLoading").style.display = "none";
+
+        document.getElementById("previewCard").style.display = "block";
+
+        const reader = new FileReader();
+
+reader.onload = function(e){
+
+    const text = e.target.result;
+
+    const rows = text.trim().split("\n");
+
+    // REMOVE HEADER
+    const dataRows = rows.slice(1);
+
+    let totalTickets = dataRows.length;
+    let highPriority = 0;
+    let openTickets = 0;
+
+    let categories = new Set();
+
+    let tableHTML = "";
+
+    dataRows.forEach(row => {
+
+        const cols = row.split(",");
+
+        const ticketId = cols[0] || "";
+        const subject = cols[1] || "";
+        const description = cols[2] || "";
+        const category = cols[3] || "";
+        const priority = cols[4] || "";
+        const status = cols[5] || "";
+
+        if(priority.toLowerCase() === "high"){
+            highPriority++;
+        }
+
+        if(status.toLowerCase() === "open"){
+            openTickets++;
+        }
+
+        if(category){
+            categories.add(category);
+        }
+
+        tableHTML += `
+        <tr>
+            <td>${ticketId}</td>
+            <td>${subject}</td>
+            <td>${description}</td>
+            <td>${priority}</td>
+            <td>${status}</td>
+        </tr>
+        `;
+    });
+
+    document.getElementById("totalTickets").innerText =
+    totalTickets;
+
+    document.getElementById("highPriority").innerText =
+    highPriority;
+
+    document.getElementById("openTickets").innerText =
+    openTickets;
+
+    document.getElementById("categoriesCount").innerText =
+    categories.size;
+
+    document.getElementById("previewTable").innerHTML =
+    tableHTML;
+
+};
+
+reader.readAsText(file);
+
+    }, 2000);
+
+}
+
+/* =====================================
+   PREVIEW CHARTS
+===================================== */
+
+new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        datasets: [{
+            label: 'Tickets',
+            data: [12,19,8,15,22,17,25],
+            borderColor: '#7c3aed',
+            backgroundColor: 'rgba(124,58,237,0.2)',
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive:true,
+        maintainAspectRatio:false
+    }
+});
+
+new Chart(document.getElementById('analyticsChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Billing','Technical','Login','Payments'],
+        datasets: [{
+            label: 'Issues',
+            data: [14,9,11,6],
+            backgroundColor: [
+                '#7c3aed',
+                '#2563eb',
+                '#f59e0b',
+                '#ef4444'
+            ]
+        }]
+    },
+    options: {
+        responsive:true,
+        maintainAspectRatio:false
+    }
+});
+
+/* =====================================
+   DASHBOARD
+===================================== */
+
+const dashboardMenu = document.getElementById("dashboardMenu");
+const dashboardPage = document.getElementById("dashboardPage");
+const closeDashboard = document.getElementById("closeDashboard");
+
+let dashboardChartsLoaded = false;
+
+dashboardMenu.addEventListener("click", () => {
+
+    dashboardPage.style.display = "flex";
+
+   
+    if(!dashboardChartsLoaded){
+
+        dashboardChartsLoaded = true;
+
+        Chart.defaults.font.family = 'Poppins';
+        Chart.defaults.color = '#475569';
+
+        new Chart(document.getElementById('categoryChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Billing','Technical','Login','Account'],
+                datasets: [{
+                    data: [30,25,20,25],
+                    backgroundColor: [
+                        '#7c3aed',
+                        '#2563eb',
+                        '#f59e0b',
+                        '#ef4444'
+                    ]
+                }]
+            },
+            options:{
+                responsive:true,
+                maintainAspectRatio:false
+            }
+        });
+
+        new Chart(document.getElementById('priorityChart'), {
+            type: 'pie',
+            data: {
+                labels: ['High','Medium','Low'],
+                datasets: [{
+                    data: [34,90,121],
+                    backgroundColor: [
+                        '#ef4444',
+                        '#f59e0b',
+                        '#22c55e'
+                    ]
+                }]
+            },
+            options:{
+                responsive:true,
+                maintainAspectRatio:false
+            }
+        });
+
+        new Chart(document.getElementById('weeklyChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+                datasets: [{
+                    label:'Tickets',
+                    data:[12,19,14,20,25,17,28],
+                    backgroundColor:'#7c3aed'
+                }]
+            },
+            options:{
+                responsive:true,
+                maintainAspectRatio:false
+            }
+        });
+
+        new Chart(document.getElementById('sentimentChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Positive','Neutral','Negative'],
+                datasets: [{
+                    data: [45,35,20],
+                    backgroundColor: [
+                        '#22c55e',
+                        '#2563eb',
+                        '#ef4444'
+                    ]
+                }]
+            },
+            options:{
+                responsive:true,
+                maintainAspectRatio:false
+            }
+        });
+
+    }
+
+});
+
+closeDashboard.addEventListener("click", () => {
+    dashboardPage.style.display = "none";
+});
+
+
+async function saveTicketToDatabase(
+    message,
+    category,
+    priority,
+    sentiment
+){
+
+    try{
+
+        await fetch('/save_ticket', {
+
+            method:'POST',
+
+            headers:{
+                'Content-Type':'application/json'
+            },
+
+            body:JSON.stringify({
+
+                message:message,
+                category:category,
+                priority:priority,
+                sentiment:sentiment
+
+            })
+
+        });
+
+    }catch(error){
+
+        console.log("Database save failed");
+
+    }
+
+}
+
+/* =====================================
+   LOAD HISTORY
+===================================== */
+
+async function loadHistory(){
+
+    try{
+
+        const response =
+        await fetch('/get_history');
+
+        const data =
+        await response.json();
+
+        const container =
+        document.getElementById(
+            "historyContainer"
+        );
+
+        container.innerHTML = "";
+
+        data.forEach(ticket => {
+
+            container.innerHTML += `
+
+            <div class="history-card">
+
+                <div class="history-top">
+
+                    <div class="history-priority">
+                        ${ticket.priority}
+                    </div>
+
+                    <div class="history-date">
+                        ${ticket.created_at}
+                    </div>
+
+                </div>
+
+                <div class="history-message">
+                    ${ticket.message}
+                </div>
+
+                <div class="history-tags">
+
+                    <div class="history-tag">
+                        ${ticket.category}
+                    </div>
+
+                    <div class="history-tag">
+                        ${ticket.sentiment}
+                    </div>
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+    }catch(error){
+
+        console.log("History load failed");
+
+    }
+
+}
+
+function updateDashboardTable(){
+
+    let html = "";
+
+    recentTickets.forEach(ticket => {
+
+        html += `
+
+        <tr>
+            <td>${ticket.id}</td>
+            <td>${ticket.subject}</td>
+            <td>${ticket.category}</td>
+            <td>${ticket.priority}</td>
+            <td>${ticket.status}</td>
+        </tr>
+
+        `;
+
+    });
+
+    document.getElementById("dashboardTable").innerHTML = html;
+
+}
+
+loadHistory();
+
+});
+</script>
+
+<!-- SUCCESS POPUP -->
+
+<div id="successPopup" class="success-popup">
+
+    <div class="popup-box">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <h2>Ticket Forwarded</h2>
+
+        <p id="popupMessage">
+            Ticket forwarded successfully!
+        </p>
+
+        <button id="closePopupBtn">
+            OK
+        </button>
+
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

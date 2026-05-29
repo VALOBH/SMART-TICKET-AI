@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SmartTicket About Page</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+
+/* =========================================
+   GLOBAL
+========================================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:
+radial-gradient(circle at top left,#1e1b4b 0%,transparent 30%),
+radial-gradient(circle at bottom right,#312e81 0%,transparent 30%),
+linear-gradient(135deg,#050816,#0b1023);
+color:#f8fafc;
+overflow-x:hidden;
+}
+
+/* BACKGROUND GLOW */
+
+body::before{
+content:"";
+position:fixed;
+width:500px;
+height:500px;
+background:#8b5cf6;
+filter:blur(180px);
+opacity:0.15;
+top:-200px;
+left:-150px;
+z-index:-1;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:500px;
+height:500px;
+background:#4f46e5;
+filter:blur(180px);
+opacity:0.15;
+bottom:-200px;
+right:-150px;
+z-index:-1;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar{
+width:100%;
+padding:26px 7%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+position:sticky;
+top:0;
+backdrop-filter:blur(20px);
+background:rgba(5,8,22,0.65);
+border-bottom:1px solid rgba(255,255,255,0.06);
+z-index:999;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:14px;
+font-size:28px;
+font-weight:700;
+}
+
+.logo-icon{
+width:54px;
+height:54px;
+border-radius:18px;
+background:linear-gradient(135deg,#8b5cf6,#4f46e5);
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 0 30px rgba(139,92,246,0.55);
+}
+
+.nav-links{
+display:flex;
+gap:45px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:#cbd5e1;
+font-size:16px;
+font-weight:500;
+transition:0.3s;
+position:relative;
+}
+
+.nav-links a:hover{
+color:white;
+}
+
+.nav-links a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-6px;
+width:0%;
+height:2px;
+background:#8b5cf6;
+transition:0.3s;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero{
+min-height:auto;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-start;
+text-align:center;
+padding:55px 20px 10px;
+}
+
+.badge{
+padding:12px 24px;
+border-radius:50px;
+background:rgba(139,92,246,0.12);
+border:1px solid rgba(139,92,246,0.4);
+color:#c4b5fd;
+font-weight:600;
+font-size:14px;
+margin-bottom:30px;
+backdrop-filter:blur(20px);
+box-shadow:0 0 25px rgba(139,92,246,0.25);
+animation:glowPulse 3s infinite;
+}
+
+.hero h1{
+font-size:52px;
+line-height:1.1;
+font-weight:800;
+max-width:950px;
+margin-bottom:22px;
+}
+
+.gradient-text{
+background:linear-gradient(135deg,#8b5cf6,#4f46e5,#c084fc);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+max-width:760px;
+font-size:16px;
+line-height:1.6;
+color:#94a3b8;
+margin-top:10px;
+}
+
+/* =========================================
+   COMMON SECTION
+========================================= */
+
+.section{
+padding:35px 7%;
+}
+
+/* GLASS CARD */
+
+.glass-card{
+background:rgba(17,24,39,0.45);
+border:1px solid rgba(255,255,255,0.06);
+backdrop-filter:blur(20px);
+border-radius:28px;
+box-shadow:
+0 10px 40px rgba(0,0,0,0.35),
+0 0 30px rgba(139,92,246,0.08);
+transition:0.4s ease;
+}
+
+.glass-card:hover{
+transform:translateY(-8px);
+border-color:rgba(139,92,246,0.45);
+box-shadow:
+0 20px 50px rgba(0,0,0,0.45),
+0 0 40px rgba(139,92,246,0.25);
+}
+
+/* =========================================
+   INFO CARDS
+========================================= */
+
+.cards-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:22px;
+margin-top:-10px;
+}
+
+.info-card{
+padding:35px;
+}
+
+.info-icon{
+width:74px;
+height:74px;
+border-radius:22px;
+background:linear-gradient(135deg,#8b5cf6,#4f46e5);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+margin-bottom:24px;
+box-shadow:0 0 30px rgba(139,92,246,0.45);
+animation:floatIcon 4s ease-in-out infinite;
+}
+
+.info-card h3{
+font-size:28px;
+margin-bottom:18px;
+}
+
+.info-card p{
+font-size:16px;
+line-height:1.9;
+color:#94a3b8;
+}
+
+/* =========================================
+   BOTTOM GRID
+========================================= */
+
+.bottom-grid{
+display:grid;
+grid-template-columns:1.2fr 0.8fr;
+gap:30px;
+margin-top:30px;
+}
+
+/* =========================================
+   HOW IT WORKS
+========================================= */
+
+.steps-card{
+padding:40px;
+position:relative;
+overflow:hidden;
+}
+
+.section-title{
+font-size:38px;
+margin-bottom:40px;
+}
+
+.steps{
+display:flex;
+flex-direction:column;
+gap:34px;
+position:relative;
+}
+
+.steps::before{
+content:"";
+position:absolute;
+left:34px;
+top:20px;
+bottom:20px;
+border-left:2px dashed rgba(139,92,246,0.5);
+}
+
+.step{
+display:flex;
+gap:24px;
+position:relative;
+z-index:2;
+}
+
+.step-icon{
+width:72px;
+height:72px;
+border-radius:50%;
+background:linear-gradient(135deg,#8b5cf6,#4f46e5);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+box-shadow:0 0 25px rgba(139,92,246,0.55);
+flex-shrink:0;
+animation:glowPulse 3s infinite;
+}
+
+.step-content h4{
+font-size:22px;
+margin-bottom:8px;
+}
+
+.step-content p{
+color:#94a3b8;
+line-height:1.7;
+}
+
+.step-number{
+color:#8b5cf6;
+font-weight:700;
+margin-bottom:4px;
+}
+
+/* =========================================
+   TECH STACK
+========================================= */
+
+.tech-card{
+padding:40px;
+}
+
+.tech-list{
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.tech-item{
+display:flex;
+align-items:center;
+gap:18px;
+padding:20px;
+border-radius:22px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.05);
+transition:0.3s;
+}
+
+.tech-item:hover{
+transform:translateX(6px);
+border-color:rgba(139,92,246,0.35);
+background:rgba(139,92,246,0.08);
+}
+
+.tech-icon{
+width:60px;
+height:60px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+background:linear-gradient(135deg,#8b5cf6,#4f46e5);
+box-shadow:0 0 25px rgba(139,92,246,0.45);
+}
+
+.tech-text h4{
+font-size:18px;
+margin-bottom:4px;
+}
+
+.tech-text p{
+font-size:14px;
+color:#94a3b8;
+}
+
+/* =========================================
+   CTA SECTION
+========================================= */
+
+.cta-section{
+padding:60px 7%;
+}
+
+.cta-banner{
+padding:55px;
+border-radius:34px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:30px;
+background:
+linear-gradient(135deg,
+rgba(139,92,246,0.15),
+rgba(79,70,229,0.12));
+border:1px solid rgba(139,92,246,0.25);
+backdrop-filter:blur(20px);
+box-shadow:
+0 10px 40px rgba(0,0,0,0.4),
+0 0 50px rgba(139,92,246,0.12);
+}
+
+.cta-text h2{
+font-size:48px;
+margin-bottom:16px;
+}
+
+.cta-text p{
+color:#94a3b8;
+font-size:18px;
+line-height:1.8;
+max-width:700px;
+}
+
+.cta-btn{
+height:66px;
+padding:0 36px;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#8b5cf6,#4f46e5);
+color:white;
+font-size:17px;
+font-weight:600;
+cursor:pointer;
+transition:0.4s;
+box-shadow:0 0 30px rgba(139,92,246,0.5);
+white-space:nowrap;
+}
+
+.cta-btn:hover{
+transform:translateY(-5px) scale(1.03);
+box-shadow:0 0 45px rgba(139,92,246,0.8);
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+.fade{
+opacity:0;
+transform:translateY(40px);
+transition:1s ease;
+}
+
+.fade.show{
+opacity:1;
+transform:translateY(0);
+}
+
+@keyframes glowPulse{
+
+0%{
+box-shadow:0 0 20px rgba(139,92,246,0.35);
+}
+
+50%{
+box-shadow:0 0 45px rgba(139,92,246,0.7);
+}
+
+100%{
+box-shadow:0 0 20px rgba(139,92,246,0.35);
+}
+
+}
+
+@keyframes floatIcon{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:1200px){
+
+.hero h1{
+font-size:62px;
+}
+
+.cards-grid{
+grid-template-columns:1fr;
+}
+
+.bottom-grid{
+grid-template-columns:1fr;
+}
+
+.cta-banner{
+flex-direction:column;
+align-items:flex-start;
+}
+
+}
+
+@media(max-width:768px){
+
+.navbar{
+padding:22px 5%;
+flex-direction:column;
+gap:20px;
+}
+
+.nav-links{
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.hero h1{
+font-size:46px;
+}
+
+.hero p{
+font-size:17px;
+}
+
+.section{
+padding:70px 5%;
+}
+
+.cta-section{
+padding:70px 5%;
+}
+
+.cta-text h2{
+font-size:36px;
+}
+
+.section-title{
+font-size:30px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+<div class="logo">
+
+<div class="logo-icon">
+<i class="fa-solid fa-robot"></i>
+</div>
+
+<span>SmartTicket</span>
+
+</div>
+
+<div class="nav-links">
+<a href="#">Features</a>
+<a href="#">How It Works</a>
+<a href="#">About</a>
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero fade">
+
+<div class="badge">
+✨ About SmartTicket
+</div>
+
+<h1>
+Built with <span class="gradient-text">Flask.</span>
+Designed for <span class="gradient-text">Simplicity.</span>
+</h1>
+
+<p>
+SmartTicket is an AI-powered support ticket analysis platform that helps teams organize, classify, prioritize, and resolve customer issues faster using intelligent automation, modern analytics, and real-time insights.
+</p>
+
+</section>
+
+<!-- INFO CARDS -->
+
+<section class="section fade">
+
+<div class="cards-grid">
+
+<div class="glass-card info-card">
+
+<div class="info-icon">
+<i class="fa-solid fa-bullseye"></i>
+</div>
+
+<h3>Our Mission</h3>
+
+<p>
+To simplify customer support workflows using intelligent AI systems that reduce manual effort, improve response quality, and help teams resolve tickets efficiently.
+</p>
+
+</div>
+
+<div class="glass-card info-card">
+
+<div class="info-icon">
+<i class="fa-solid fa-eye"></i>
+</div>
+
+<h3>Our Vision</h3>
+
+<p>
+We aim to build a smarter future where AI assists support teams with actionable insights, predictive analytics, and seamless automation experiences.
+</p>
+
+</div>
+
+<div class="glass-card info-card">
+
+<div class="info-icon">
+<i class="fa-solid fa-code"></i>
+</div>
+
+<h3>Why Flask?</h3>
+
+<p>
+Flask provides a lightweight and flexible backend framework for building scalable AI-powered web applications.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- HOW IT WORKS + TECH STACK -->
+
+<section class="section fade">
+
+<div class="bottom-grid">
+
+<!-- LEFT -->
+
+<div class="glass-card steps-card">
+
+<h2 class="section-title">
+How It Works
+</h2>
+
+<div class="steps">
+
+<div class="step">
+
+<div class="step-icon">
+<i class="fa-solid fa-upload"></i>
+</div>
+
+<div class="step-content">
+
+<div class="step-number">
+STEP 01
+</div>
+
+<h4>Upload Tickets</h4>
+
+<p>
+Upload support ticket datasets or paste customer issues directly into the platform.
+</p>
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-icon">
+<i class="fa-solid fa-brain"></i>
+</div>
+
+<div class="step-content">
+
+<div class="step-number">
+STEP 02
+</div>
+
+<h4>AI Processing</h4>
+
+<p>
+AI models classify tickets, analyze sentiment, and detect priority automatically.
+</p>
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-icon">
+<i class="fa-solid fa-chart-column"></i>
+</div>
+
+<div class="step-content">
+
+<div class="step-number">
+STEP 03
+</div>
+
+<h4>Insights & Analytics</h4>
+
+<p>
+Interactive dashboards provide trends, category distributions, and AI-generated insights.
+</p>
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-icon">
+<i class="fa-solid fa-bolt"></i>
+</div>
+
+<div class="step-content">
+
+<div class="step-number">
+STEP 04
+</div>
+
+<h4>Resolve Faster</h4>
+
+<p>
+Teams use intelligent recommendations and analytics to improve support efficiency.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="glass-card tech-card">
+
+<h2 class="section-title">
+Tech Stack
+</h2>
+
+<div class="tech-list">
+
+<div class="tech-item">
+
+<div class="tech-icon">
+<i class="fa-solid fa-window-maximize"></i>
+</div>
+
+<div class="tech-text">
+<h4>Streamlit</h4>
+<p>Interactive AI dashboard framework</p>
+</div>
+
+</div>
+
+<div class="tech-item">
+
+<div class="tech-icon">
+<i class="fa-brands fa-python"></i>
+</div>
+
+<div class="tech-text">
+<h4>Python</h4>
+<p>Core backend programming language</p>
+</div>
+
+</div>
+
+<div class="tech-item">
+
+<div class="tech-icon">
+<i class="fa-solid fa-table"></i>
+</div>
+
+<div class="tech-text">
+<h4>Pandas</h4>
+<p>Data cleaning and CSV analytics</p>
+</div>
+
+</div>
+
+<div class="tech-item">
+
+<div class="tech-icon">
+<i class="fa-solid fa-robot"></i>
+</div>
+
+<div class="tech-text">
+<h4>Scikit-learn</h4>
+<p>Machine learning ticket classification</p>
+</div>
+
+</div>
+
+<div class="tech-item">
+
+<div class="tech-icon">
+<i class="fa-solid fa-comment-dots"></i>
+</div>
+
+<div class="tech-text">
+<h4>NLTK / TextBlob</h4>
+<p>Sentiment analysis and NLP processing</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta-section fade">
+
+<div class="cta-banner">
+
+<div class="cta-text">
+
+<h2>
+Made for Teams. Built for Impact.
+</h2>
+
+<p>
+Transform your support workflow with AI-powered ticket analysis, intelligent automation, and modern analytics dashboards designed for high-performing teams.
+</p>
+
+</div>
+
+<a href="analysis.html">
+    <button class="cta-btn">
+        Try SmartTicket Now →
+    </button>
+</a>
+
+</div>
+
+</section>
+
+<script>
+
+/* =========================================
+   FADE IN ON SCROLL
+========================================= */
+
+const fadeElements = document.querySelectorAll('.fade');
+
+const observer = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+
+});
+
+},{
+threshold:0.2
+});
+
+fadeElements.forEach(el=>{
+observer.observe(el);
+});
+
+</script>
+
+</body>
+</html>
+

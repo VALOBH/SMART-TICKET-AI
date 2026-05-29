@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>SmartTicket Features</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+
+/* =========================================
+   GLOBAL
+========================================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:
+radial-gradient(circle at top left,#1b1447 0%,transparent 35%),
+radial-gradient(circle at bottom right,#10204a 0%,transparent 35%),
+linear-gradient(135deg,#050816,#070b1a,#0b1023);
+color:#f8fafc;
+overflow-x:hidden;
+}
+
+/* =========================================
+   BACKGROUND GLOW
+========================================= */
+
+body::before{
+content:"";
+position:fixed;
+width:450px;
+height:450px;
+background:#7b4dff;
+filter:blur(180px);
+opacity:0.15;
+top:-120px;
+left:-120px;
+z-index:-1;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:450px;
+height:450px;
+background:#4d7cff;
+filter:blur(180px);
+opacity:0.12;
+bottom:-120px;
+right:-120px;
+z-index:-1;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar{
+width:100%;
+padding:18px 6%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+position:sticky;
+top:0;
+z-index:999;
+background:rgba(5,8,22,0.72);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.logo-box{
+width:58px;
+height:58px;
+border-radius:18px;
+border:1px solid rgba(123,77,255,0.5);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+color:#7b4dff;
+background:rgba(123,77,255,0.08);
+box-shadow:0 0 25px rgba(123,77,255,0.35);
+}
+
+.logo-text{
+display:flex;
+flex-direction:column;
+}
+
+.logo-text h2{
+font-size:34px;
+font-weight:700;
+line-height:1;
+}
+
+.logo-text span{
+font-size:13px;
+color:#94a3b8;
+margin-top:4px;
+}
+
+.gradient{
+background:linear-gradient(135deg,#7b4dff,#4d7cff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.nav-links{
+display:flex;
+gap:45px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:#d1d5db;
+font-size:16px;
+font-weight:500;
+transition:0.3s;
+position:relative;
+}
+
+.nav-links a:hover{
+color:#7b4dff;
+}
+
+.nav-links a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-8px;
+width:0%;
+height:2px;
+background:#7b4dff;
+transition:0.3s;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+/* =========================================
+   FEATURES SECTION
+========================================= */
+
+.features-section{
+padding:45px 6% 60px;
+text-align:center;
+}
+
+.badge{
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:10px 22px;
+border-radius:50px;
+background:rgba(123,77,255,0.1);
+border:1px solid rgba(123,77,255,0.3);
+color:#c4b5fd;
+font-size:14px;
+font-weight:600;
+backdrop-filter:blur(15px);
+box-shadow:0 0 25px rgba(123,77,255,0.18);
+margin-bottom:28px;
+}
+
+.main-title{
+font-size:52px;
+line-height:1.2;
+font-weight:800;
+max-width:850px;
+margin:auto;
+margin-bottom:14px;
+}
+
+.main-title span{
+background:linear-gradient(135deg,#7b4dff,#4d7cff,#c084fc);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+max-width:700px;
+margin:auto;
+font-size:17px;
+line-height:1.7;
+color:#94a3b8;
+margin-bottom:30px;
+}
+
+/* =========================================
+   FEATURES GRID
+========================================= */
+
+.features-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:24px;
+}
+
+/* =========================================
+   FEATURE CARD
+========================================= */
+
+.feature-card{
+position:relative;
+padding:28px 24px;
+border-radius:24px;
+background:rgba(17,24,39,0.45);
+border:1px solid rgba(255,255,255,0.06);
+backdrop-filter:blur(20px);
+overflow:hidden;
+transition:0.4s ease;
+box-shadow:
+0 10px 30px rgba(0,0,0,0.3),
+0 0 20px rgba(123,77,255,0.05);
+}
+
+.feature-card:hover{
+transform:translateY(-8px);
+border-color:rgba(123,77,255,0.35);
+box-shadow:
+0 20px 40px rgba(0,0,0,0.4),
+0 0 30px rgba(123,77,255,0.2);
+}
+
+.icon-box{
+width:85px;
+height:85px;
+margin:auto;
+margin-bottom:28px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+position:relative;
+}
+
+.icon-purple{
+background:rgba(123,77,255,0.12);
+color:#7b4dff;
+box-shadow:0 0 35px rgba(123,77,255,0.25);
+}
+
+.icon-green{
+background:rgba(18,209,142,0.12);
+color:#12d18e;
+box-shadow:0 0 35px rgba(18,209,142,0.2);
+}
+
+.icon-orange{
+background:rgba(255,176,32,0.12);
+color:#ffb020;
+box-shadow:0 0 35px rgba(255,176,32,0.2);
+}
+
+.icon-blue{
+background:rgba(77,124,255,0.12);
+color:#4d7cff;
+box-shadow:0 0 35px rgba(77,124,255,0.2);
+}
+
+.feature-card h3{
+font-size:24px;
+margin-bottom:16px;
+font-weight:700;
+}
+
+.feature-card p{
+font-size:16px;
+line-height:1.9;
+color:#94a3b8;
+margin-bottom:24px;
+}
+
+.learn-btn{
+display:inline-flex;
+align-items:center;
+gap:10px;
+text-decoration:none;
+color:#7b4dff;
+font-weight:600;
+transition:0.3s;
+}
+
+.learn-btn:hover{
+gap:16px;
+}
+
+/* =========================================
+   CTA BUTTON
+========================================= */
+
+.cta-area{
+margin-top:45px;
+}
+
+.cta-btn{
+height:62px;
+padding:0 36px;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#7b4dff,#4d7cff);
+color:white;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+display:inline-flex;
+align-items:center;
+gap:12px;
+box-shadow:0 0 30px rgba(123,77,255,0.4);
+transition:0.35s;
+}
+
+.cta-btn:hover{
+transform:translateY(-4px) scale(1.03);
+box-shadow:0 0 45px rgba(123,77,255,0.7);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:1100px){
+
+.features-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.main-title{
+font-size:54px;
+}
+
+}
+
+@media(max-width:768px){
+
+.navbar{
+flex-direction:column;
+gap:20px;
+padding:20px 5%;
+}
+
+.nav-links{
+gap:22px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.features-grid{
+grid-template-columns:1fr;
+}
+
+.main-title{
+font-size:42px;
+}
+
+.subtitle{
+font-size:17px;
+}
+
+.feature-card h3{
+font-size:24px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================================
+     NAVBAR
+========================================= -->
+
+<nav class="navbar">
+
+<div class="logo">
+
+<div class="logo-box">
+<i class="fa-solid fa-microchip"></i>
+</div>
+
+<div class="logo-text">
+<h2>Smart<span class="gradient">Ticket</span></h2>
+<span>Understanding. Classifying. Solving.</span>
+</div>
+
+</div>
+
+<div class="nav-links">
+<a href="#">Features</a>
+<a href="#">How It Works</a>
+<a href="#">About</a>
+</div>
+
+</nav>
+
+<!-- =========================================
+     FEATURES SECTION
+========================================= -->
+
+<section class="features-section">
+
+<div class="badge">
+<i class="fa-solid fa-bolt"></i>
+FEATURES
+</div>
+
+<h1 class="main-title">
+Powerful Features for <br>
+a <span>Better Experience</span>
+</h1>
+
+<p class="subtitle">
+Everything you need to build, manage and grow your support workflow in one intelligent AI-powered platform.
+</p>
+
+<!-- FEATURES GRID -->
+
+<div class="features-grid">
+
+<!-- CARD 1 -->
+
+<div class="feature-card">
+
+<div class="icon-box icon-purple">
+<i class="fa-solid fa-bolt"></i>
+</div>
+
+<h3>Blazing Fast Performance</h3>
+
+<p>
+Optimized AI processing and real-time analytics ensure your support system responds instantly and efficiently.
+</p>
+
+
+
+</div>
+
+<!-- CARD 2 -->
+
+<div class="feature-card">
+
+<div class="icon-box icon-green">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+
+<h3>Secure & Reliable</h3>
+
+<p>
+Enterprise-grade protection and reliable infrastructure keep your customer data secure at all times.
+</p>
+
+
+</div>
+
+<!-- CARD 3 -->
+
+<div class="feature-card">
+
+<div class="icon-box icon-orange">
+<i class="fa-solid fa-mobile-screen-button"></i>
+</div>
+
+<h3>Fully Responsive</h3>
+
+<p>
+Access SmartTicket from desktop, tablet, or mobile with a seamless modern experience across devices.
+</p>
+
+</div>
+
+<!-- CARD 4 -->
+
+<div class="feature-card">
+
+<div class="icon-box icon-blue">
+<i class="fa-regular fa-user"></i>
+</div>
+
+<h3>Easy to Use</h3>
+
+<p>
+Simple workflows and intuitive interfaces help teams manage support tickets without complexity.
+</p>
+
+
+</div>
+
+<!-- CARD 5 -->
+
+<div class="feature-card">
+
+<div class="icon-box icon-purple">
+<i class="fa-solid fa-chart-line"></i>
+</div>
+
+<h3>Powerful Analytics</h3>
+
+<p>
+Track trends, customer sentiment, and ticket performance using smart AI-driven dashboards.
+</p>
+
+
+
+</div>
+
+<!-- CARD 6 -->
+
+<div class="feature-card">
+
+<div class="icon-box icon-purple">
+<i class="fa-solid fa-headset"></i>
+</div>
+
+<h3>24/7 Customer Support</h3>
+
+<p>
+Our intelligent support ecosystem ensures faster resolutions and a better customer experience.
+</p>
+
+</div>
+
+</div>
+
+<!-- CTA -->
+
+<div class="cta-area">
+
+    <a href="analysis.html">
+        <button class="cta-btn">
+            <i class="fa-solid fa-rocket"></i>
+            Get Started Today
+        </button>
+    </a>
+
+</div>
+
+</section>
+
+</body>
+</html>
